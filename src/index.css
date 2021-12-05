@@ -1,0 +1,104 @@
+/* #5EC25F */
+
+/* Material-UI fonts */
+@import "@fontsource/roboto/300.css";
+@import "@fontsource/roboto/400.css";
+@import "@fontsource/roboto/500.css";
+@import "@fontsource/roboto/700.css";
+
+
+/* Custom Styles */
+.logo {
+    width: 100%;
+    border: none;
+}
+
+.form-row {
+    margin-top: 20px;
+}
+
+.MuiDropzoneArea-root {
+    display: inline-block !important;
+    width: 200px !important;
+    border: 2px dashed #ddd !important;
+    border-radius: 10px !important;
+    margin: 5px !important;
+    padding: 10px;
+    overflow: hidden;
+}
+
+/* Adjust spacing after icons */
+.MuiListItemIcon-root {
+    min-width: initial !important;
+    margin-right: 10px;
+}
+
+.copy-contract-addr {
+    position: relative;
+    top: -10px;
+}
+/* NFT Row flex-box container */
+.nft-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.nft {
+    display: inline-block;
+    width: 200px;
+    text-align: center;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    margin: 5px;
+    cursor: pointer;
+    overflow:hidden;
+}
+
+.nft .nft-image {
+    display: table-cell;
+    width: 200px;
+    height: 200px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.nft .nft-image img {
+    max-width: 100%;
+    height: auto;
+    max-height: 200px;
+}
+
+.nft-content {
+    text-align: center;
+}
+
+.nft-content p {
+    font-size: smaller;
+    max-height: 50px;
+    overflow-y: scroll;
+    height: 100px;
+}
+
+
+/* @media (max-width: 580px) {
+    .nft {
+        width: 100%;
+    }
+} */
+
+/* truncate multi-line text */
+.truncate-overflow {
+    --lh: 1.4rem;
+    line-height: var(--lh);
+    --max-lines: 3;
+    position: relative;
+    max-height: calc(var(--lh) * var(--max-lines));
+    overflow: hidden;
+    padding-right: 1rem; /* space for ellipsis */
+}
+
+
+

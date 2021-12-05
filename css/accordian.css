@@ -1,0 +1,40 @@
+.accordion-toggle {
+    display: block;
+    font-weight: 400;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 14px !important;
+    padding: 12px 20px;
+    cursor: pointer;
+    color: #fff;
+    border-color: black;
+    background-color: #00d1b2;
+    margin-bottom:-1px;
+}
+
+.accordion-toggle:hover {
+    color: #00947e;
+    border-color: #00947e;
+    background-color: #ebfffc;
+}
+
+.accordion-content {
+    height: 0px;
+    overflow: hidden;
+
+    transition: height .5s ease;
+}
+
+.accordion-content.active {
+    display: block;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding: 15px;
+
+    height: auto;
+    
+}
+
+.accordion-content.active.last {
+    border-bottom: 1px solid black;
+}

@@ -1,0 +1,141 @@
+// import loadWeb3 from './web3-loader';
+// import { getAbi, getByteCode } from '../contracts/nft-factory';
+
+// export async function estimateGas(name: string, symbol: string, maxTokens: number) : Promise<number> {
+
+//   return new Promise<number>(async (resolve, reject) => {
+//     try {
+//       const w3 = await loadWeb3();
+//       const provider = (w3 as any)?.currentProvider;
+
+//       if (!provider?.isMetaMask) {
+//         reject('Please connect with Metamask.');
+//         return;
+//       }
+
+//       const account = provider?.selectedAddress;
+//       if (!account) {
+//         reject('Please select an account in your Metamask wallet.');
+//         return;
+//       }
+
+//       console.log(account);
+      
+//       const contract = new w3.eth.Contract(getAbi());
+    
+//       contract.deploy({
+//         data: getByteCode(),
+//         arguments: [name, symbol, maxTokens]
+//       }).estimateGas(function(err, gas){
+//         if (err) {
+//           reject(err.message);
+//         } else {
+//           resolve(gas);
+//         }
+//       });
+//     } catch (error) {
+//       reject(error.message);
+//     }
+//   });
+// }
+
+// export async function deployContract(name: string, symbol: string, maxTokens: number, gasLimit: number,
+//   confirmationsCallback : (confirmations: number, receipt: any) => void) {
+
+//   return new Promise<any>(async (resolve, reject) => {
+//     try {
+//       const w3 = await loadWeb3();
+//       const provider = (w3 as any)?.currentProvider;
+
+//       if (!provider?.isMetaMask) {
+//         reject('Please connect with Metamask.');
+//         return;
+//       }
+
+//       // Chain Ids:
+//       // Avalanche FUJI Test Network: 0xa869
+//       // Avalanche Main Network: 0xa86a
+//       // Ethereum Main Network: 0x1
+//       // Ethereum Kovan Test Network: 0x2a
+//       // Ethereum Ropsten Test Network: 0x3
+//       // Ethereum Rinkeby Test Network: 0x4
+//       // Ethereum Goerli Test Network: 0x5
+     
+//       let explorerBasePath = '';
+//       switch (provider.chainId) {
+//         case '0xa869':
+//           explorerBasePath = 'https://cchain.explorer.avax-test.network';
+//           break;
+//         case '0xa86a':
+//           explorerBasePath = 'https://cchain.explorer.avax.network';
+//           break;
+//         default:
+//           reject('Unsupported network. Please select the Avalanche Main Network in Metamask.');
+//           return;
+//       }
+
+//       const account = provider?.selectedAddress;
+//       if (!account) {
+//         reject('Please select an account in your Metamask wallet.');
+//         return;
+//       }
+
+//       console.log(account);
+      
+//       const abi = getAbi();
+//       const contract = new w3.eth.Contract(abi);
+    
+//       contract.deploy({
+//         data: getByteCode(),
+//         arguments: [name, symbol, maxTokens]
+//       }).send({
+//         from: account,
+//         gas: gasLimit
+//       }, function(err, transactionHash) {
+//         if (err) {
+//           reject(err.message);
+//         } else {
+//           console.log(`transactionHash: ${transactionHash}`);
+//         }
+//       })
+//       .on('error', function(err) {
+//         if (err) {
+//           reject(err.message);
+//         } else {
+//           reject(`unknown error`);
+//         }
+//       })
+//       .on('transactionHash', function(transactionHash) {
+//         console.log(`transactionHash: ${transactionHash}`);
+//       })
+//       .on('receipt', function(receipt) {
+//         // contains the new contract address
+//         if (!receipt?.contractAddress) {
+//           reject(`empty contract address in receipt`);
+//         } else {
+//           console.log(`contractAddress: ${receipt.contractAddress}`);
+//         }
+//       })
+//       .on('confirmation', function(confirmationNumber, receipt) {
+//         //TODO: update IndexedDB by setting the confirmation number
+//         //      for the contract deployment
+//         console.log(`confirmationNumber: ${confirmationNumber}`);
+//         console.log(`receipt:`);
+//         console.log(receipt);
+
+//         if (confirmationsCallback) {
+//           confirmationsCallback(confirmationNumber, receipt);
+//         }
+//       })
+//       .then(function(newContractInstance) {
+//         // instance with the new contract address
+//         const address = newContractInstance?.options?.address;
+//         const explorerPath = `${explorerBasePath}/address/${address}`;
+//         resolve({address, explorerPath});
+//       });
+//     } catch (error) {
+//       reject(error.message);
+//     }
+
+//   });
+// }

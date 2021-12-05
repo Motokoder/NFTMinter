@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <script src="js/web3.min.js"></script>    
+    <script src="https://unpkg.com/arweave/bundles/web.bundle.js"></script>
+    <script src="js/arweave.js"></script>
+    <script src="js/accordian.js"></script>
+
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/accordian.css">
+  </head>
+  <style>
+
+    body {
+      font-size: 12px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+  </style>
+  <body>
+
+    <div>
+      <span id="avaxWalletAddress"></span><br/>
+      <span id='web3Network'></span><br/>
+      <span id='web3Provider'></span>
+    </div>
+    <!-- Accordian -->
+    <div class="accordion-toggle">Create Smart Contract</div>
+    <div class="accordion-content">
+      TODO
+    </div>
+
+    <div class="accordion-toggle">Upload Media</div>
+    <div class="accordion-content">
+      <div>
+        <label for="keyFile" class="button">
+          <i class="fa fa-cloud-upload"></i> Upload Key File
+        </label>
+        <input id="keyFile" type="file" accept=".json" onchange="readKeyFile();" />
+        
+        <label for="imageFile" class="button">
+          <i class="fa fa-cloud-upload"></i> Select Files
+        </label>
+        <input id="imageFile" type="file" accept=".bmp,.gif,.jpg,.jpeg,.png,.mp4" onchange="readFile();" multiple />
+      </div>
+      <div>
+        <span id="arweaveNetwork"></span><br/>
+        <span id="arweaveAddress"></span><br/>
+        <span id="arweaveBalance"></span>
+      </div>
+
+      <div>
+          <img id="image" style="width:320px;height:320px"/>
+      </div>
+      
+      <div>
+        <button onclick="createTx()">Save Image to Arweave</button>
+        <button onclick="getTxData()">Get Image from Arweave</button>
+      </div>
+    </div>
+
+    <div class="accordion-toggle">Mint NFTs - Brrr</div>
+    <div class="accordion-content last">
+      Content goes here...
+    </div>
+
+
+    <!-- Web3 Integration -->
+    <script>
+      async function loadWeb3() {
+        window.web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+        if (window.web3) {
+          await window.ethereum.enable();
+        } else {
+          window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+        }
+
+        document.getElementById('web3Provider').innerText = `Web3 Provider: ${JSON.stringify(Web3.givenProvider)}`;
+        
+        web3.eth.net.getNetworkType().then(networkType => {
+          document.getElementById('web3Network').innerText = `Web3 Network: ${networkType}`;
+        });
+
+        window.web3.eth.getAccounts().then(acct => {
+          document.getElementById('avaxWalletAddress').innerText = `Web3 wallet address: ${acct}`;
+        });
+
+        // if (window.ethereum) {
+        //   window.web3 = new Web3(window.ethereum)
+        //   await window.ethereum.enable()
+        // }
+        // else if (window.web3) {
+        //   window.web3 = new Web3(window.web3.currentProvider)
+        // }
+        // else {
+        //   window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+        // }
+      }
+
+      loadWeb3();
+    </script>
+
+  </body>
+</html>
